@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0d1017" />
+  <title>Control de Residencia | 500 horas</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-symbol">◷</span><div><strong>Mi Residencia</strong><small>Control de horas profesionales</small></div></div>
+      <span class="top-label">PERIODO 2026</span>
+    </header>
+    <main>
+      <section class="overview" aria-label="Resumen de horas">
+        <div><div class="eyebrow">RESIDENCIA PROFESIONAL</div><h1>Mis 500 horas<span>.</span></h1><p>Iniciada el 30 de junio de 2026 · Lunes a viernes</p></div>
+        <div class="summary-cards">
+          <article class="metric"><span>Horas registradas</span><strong id="totalHours">0 h</strong><small>De 500 horas requeridas</small></article>
+          <article class="metric"><span>Horas pendientes</span><strong id="remainingHours">500 h</strong><small id="progressLabel">0% completado</small></article>
+          <article class="metric"><span>Días registrados</span><strong id="daysWorked">0</strong><small id="averageLabel">Promedio: 0 h por día</small></article>
+        </div>
+        <div class="progress-track" role="progressbar" aria-label="Avance de residencia" aria-valuemin="0" aria-valuemax="500" aria-valuenow="0" id="progressTrack"><div id="progressFill"></div></div>
+      </section>
+      <section class="calendar-panel">
+        <div class="calendar-toolbar">
+          <div class="nav-actions"><button id="prevBtn" class="icon-btn" aria-label="Anterior">‹</button><button id="nextBtn" class="icon-btn" aria-label="Siguiente">›</button><button id="todayBtn" class="secondary-btn">Hoy</button></div>
+          <h2 id="calendarTitle"></h2>
+          <div class="view-actions" role="group" aria-label="Vista del calendario"><button type="button" class="view-btn active" data-view="month">Mes</button><button type="button" class="view-btn" data-view="week">Semana</button><button type="button" class="view-btn" data-view="day">Día</button></div>
+        </div>
+        <div class="weekday-head"><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span></div>
+        <div id="calendarGrid" class="calendar-grid" aria-label="Días de calendario"></div>
+        <div class="legend"><span><i class="dot completed"></i> Registrado</span><span><i class="dot today"></i> Hoy</span><span><i class="dot weekend"></i> Fin de semana</span><span class="hint">Selecciona un día para registrar tus horas</span></div>
+      </section>
+      <section class="bottom-section"><div><h2>Registro de jornadas</h2><p>Consulta y exporta las horas que has capturado.</p></div><button id="exportBtn" class="secondary-btn export-btn">↓ Exportar CSV</button></section>
+      <div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Entrada</th><th>Salida</th><th>Descanso</th><th>Horas</th><th>Acción</th></tr></thead><tbody id="entriesBody"></tbody></table><p id="emptyMessage" class="empty-message">Aún no hay jornadas registradas. Haz clic en una fecha del calendario para comenzar.</p></div>
+    </main>
+    <footer>Los datos se guardan en este navegador. Para respaldarlos, exporta tu CSV periódicamente.</footer>
+  </div>
+  <dialog id="entryDialog" class="entry-dialog" aria-labelledby="dialogTitle"><form id="entryForm"><div class="dialog-head"><div><div class="eyebrow">REGISTRO DIARIO</div><h2 id="dialogTitle">Registrar jornada</h2><p id="selectedDateText"></p></div><button type="button" class="close-btn" id="closeBtn" aria-label="Cerrar">×</button></div>
+  <label for="startTime">Hora de entrada</label><input id="startTime" type="time" value="09:00" required />
+  <label for="endTime">Hora de salida</label><input id="endTime" type="time" value="17:00" required />
+  <label for="breakMinutes">Descanso no trabajado (minutos)</label><input id="breakMinutes" type="number" min="0" max="1439" step="1" value="0" required />
+  <label for="notes">Actividades realizadas (opcional)</label><textarea id="notes" rows="3" maxlength="1000" placeholder="Ej. Desarrollo, pruebas, documentación..."></textarea>
+  <div id="hoursPreview" class="hours-preview">Total del día: 8 h</div><p id="formError" class="form-error" role="alert"></p>
+  <div class="dialog-actions"><button type="button" id="deleteBtn" class="danger-btn" hidden>Eliminar</button><div class="dialog-actions-right"><button type="button" id="cancelBtn" class="secondary-btn">Cancelar</button><button type="submit" class="primary-btn">Guardar jornada</button></div></div>
+  </form></dialog>
+</body>
+</html>
